@@ -16,5 +16,25 @@ namespace SpellChecker
         {
             InitializeComponent();
         }
+
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

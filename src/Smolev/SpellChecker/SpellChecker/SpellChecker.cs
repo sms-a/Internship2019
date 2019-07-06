@@ -10,7 +10,13 @@ namespace SpellChecker
     {
         public static string CheckText(string text, string[] dict)
         {
-            throw new NotImplementedException("Функциональность проверки текста будет реализована позднее");
+            int alpha = 0, nonAlpha = 0;
+            string result = "";
+            for (int i = 0; i<text.Length; i++)
+            {
+                
+            }
+            return result;
         }
         /**
          * Для заданного слова word с учетом словаря корректных слов dict ыозвращает

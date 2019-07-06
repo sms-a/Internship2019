@@ -48,9 +48,14 @@ namespace SpellChecker
         [Test]
         public void WhiteSpaceAndOtherNonAlphabetMustBeIntact()
         {
-            Assert.That(SpellChecker.CheckText("  one!\n  two-20\t'three apples'! ", new string[] {"apples", "too", "tree" }), Is.EqualTo("  {one?}!\n  too-20\t'tree apples'! "));
+            Assert.That(SpellChecker.CheckText("  one!\n  two-20\t'three apples , yesh'! ", new string[] {"apples", "too", "tree", "yes", "yeah" , "y"}), Is.EqualTo("  {one?}!\n  too-20\t'tree apples , {yes, yeah}'! "));
         }
 
+        [Test]
+        public void OneCorrectWordString()
+        {
+            Assert.That(SpellChecker.CheckText("a", new string[] { "abs", "ads", "b", "c", "a" }), Is.EqualTo("a"));
+        }
 
 
         [Test]

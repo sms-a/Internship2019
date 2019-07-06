@@ -1,0 +1,16 @@
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\SpellChecker.exe.config
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\NUnit3.TestAdapter.dll
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\NUnit3.TestAdapter.pdb
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\nunit.engine.dll
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\nunit.engine.api.dll
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\SpellChecker.exe
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\SpellChecker.pdb
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\nunit.framework.dll
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\nunit.framework.pdb
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\bin\Debug\nunit.framework.xml
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.csprojResolveAssemblyReference.cache
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.Form1.resources
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.Properties.Resources.resources
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.csproj.GenerateResource.Cache
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.exe
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.pdb

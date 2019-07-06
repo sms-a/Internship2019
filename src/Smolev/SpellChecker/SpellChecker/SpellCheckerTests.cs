@@ -12,7 +12,7 @@ namespace SpellChecker
         [Test]
         public void WordIsCorrectIfInDictionaryIgnoreCase()
         {
-            Assert.That(SpellChecker.CheckWord("АБВГдеж", new string[] { "абвж", "абвгдеж" }), Is.EqualTo("АБВГдеж"));
+            Assert.That(SpellChecker.CheckWord("абвгдеж", new string[] { "абвж", "АБВГдеж" }), Is.EqualTo("АБВГдеж"));
         }
 
         [Test]
@@ -90,6 +90,8 @@ namespace SpellChecker
         }
 
         [TestCase("компдютер", "компьютер", ExpectedResult = 2)]
+        [TestCase("abcde", "bbcde", ExpectedResult = 2)]
+        [TestCase("abcde", "abcdf", ExpectedResult = 2)]
         [TestCase("компддтер", "компьютер", ExpectedResult = -1)]
         [TestCase("я", "а", ExpectedResult = 2)]
         public int DetectOneIncorrectLetter(string checkword, string dictword)

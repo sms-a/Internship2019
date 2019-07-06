@@ -12,12 +12,47 @@ namespace SpellChecker
         {
             throw new NotImplementedException("Функциональность проверки текста будет реализована позднее");
         }
+        /**
+         * Для заданного слова word с учетом словаря корректных слов dict ыозвращает
+         * это слово, если оно корректно, либо список возможных замен
+         */
         public static string CheckWord(string word, string[] dict)
         {
+            if (word.Length > 50) return "{" + word + "?}"; // по условию, длина слова не больше 50, поэтому тест на дурака (если не сделать, CanReplace может зависнуть)
+            string lWord = word.ToLower();
+            bool hasOneEditDistSubst = false;
+            string substs = "{";
             foreach (string dictword in dict)
-                if (word.Equals(dictword, StringComparison.CurrentCultureIgnoreCase))
-                    return word;
-            return "";
+            {
+
+                string lDict = dictword.ToLower();
+                switch (CanReplace(lWord, lDict))
+                {
+                    case 0:
+                        return dictword;
+                    case 1:
+                        if (!hasOneEditDistSubst)
+                        {
+                            hasOneEditDistSubst = true;
+                            substs = "{";
+                        }
+                        substs += dictword + ", ";
+                        break;
+                    case 2:
+                        if (!hasOneEditDistSubst)
+                        {
+                            substs += dictword + ", ";
+                        }
+                        break;
+                    default: // -1
+                        break;
+
+                }
+            }
+            if (substs == "{")
+                return "{" + word + "?}";
+            else
+                return substs.TrimEnd().Contains(" ") ? substs.Substring(0, substs.Length - 2) + "}" : substs.Substring(1, substs.Length - 3);
         }
         /**
          * Проверка, может ли проверяемое слово быть заменено на словарное с помощью не более чем двух правок.

@@ -14,7 +14,7 @@ namespace MySpellChecker
 
         public DictionaryLogic(IEnumerable<string> sample)
         {
-            _dictionary = sample.Select(w => w.ToLower()) 
+            _dictionary = sample.Select(w => w) 
                 .GroupBy(w => w)
                 .ToDictionary(w => w.Key, w => w.Count());
         }

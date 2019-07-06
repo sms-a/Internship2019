@@ -2,13 +2,10 @@
 using System;
 using System.Collections.Generic;
 
-
-namespace SpellChecker
+namespace SpellChecker.Tests
 {
     public class SpellCheckerTests
     {
-
-
         [Test]
         public void WordIsCorrectIfInDictionaryIgnoreCase()
         {
@@ -42,13 +39,13 @@ namespace SpellChecker
         [Test]
         public void MoreThanOneCorrectionWithEditDistTwoAndChangedOrderInDict()
         {
-            Assert.That(SpellChecker.CheckWord("Two", new string[] { "tewot", "van", "too",  "three" }), Is.EqualTo("{tewot too}"));
+            Assert.That(SpellChecker.CheckWord("Two", new string[] { "tewot", "van", "too", "three" }), Is.EqualTo("{tewot too}"));
         }
 
         [Test]
         public void WhiteSpaceAndOtherNonAlphabetMustBeIntact()
         {
-            Assert.That(SpellChecker.CheckText("  one!\n  two-20\t'three apples , yesh'! ", new string[] {"apples", "too", "tree", "ys", "yeah" , "y"}), Is.EqualTo("  {one?}!\n  too-20\t'tree apples , {ys yeah}'! "));
+            Assert.That(SpellChecker.CheckText("  one!\n  two-20\t'three apples , yesh'! ", new string[] { "apples", "too", "tree", "ys", "yeah", "y" }), Is.EqualTo("  {one?}!\n  too-20\t'tree apples , {ys yeah}'! "));
         }
 
         [Test]

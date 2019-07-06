@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpellChecker", "SpellChecker\SpellChecker.csproj", "{A7235BF9-4F24-4077-AFE8-00FE24CD6E92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpellChecker.Tests", "ClassLibrary1\SpellChecker.Tests.csproj", "{B994C24C-A543-47AB-896C-4862DEC347B3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A7235BF9-4F24-4077-AFE8-00FE24CD6E92} = {A7235BF9-4F24-4077-AFE8-00FE24CD6E92}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{A7235BF9-4F24-4077-AFE8-00FE24CD6E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7235BF9-4F24-4077-AFE8-00FE24CD6E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7235BF9-4F24-4077-AFE8-00FE24CD6E92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B994C24C-A543-47AB-896C-4862DEC347B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B994C24C-A543-47AB-896C-4862DEC347B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B994C24C-A543-47AB-896C-4862DEC347B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B994C24C-A543-47AB-896C-4862DEC347B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

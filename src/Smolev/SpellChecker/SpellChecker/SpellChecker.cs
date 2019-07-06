@@ -9,6 +9,17 @@ namespace SpellChecker
     public class SpellChecker
     {
         /**
+         * Исходный метод для проверки входного текста на правильность написанных слов
+         * Параметр input: входной текст, отформатированный в соответствии с заданием
+         */
+        public static string SpellCheck(string input)
+        {
+            string[] textAndDict = input.Split(new string[] { "===" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] dict = textAndDict[0].Split(' ');
+            return CheckText(textAndDict[1].TrimStart('\n'), dict);
+        }
+
+        /**
          * Проверка строки на корректность написания слов
          * text: строка
          * dict: словарь
@@ -32,6 +43,7 @@ namespace SpellChecker
                 result += CheckWord(text.Substring(nonAlpha + 1, alpha - nonAlpha), dict);
             return result;
         }
+
         /**
          * Для заданного слова word с учетом словаря корректных слов dict ыозвращает
          * это слово, если оно корректно, либо список возможных замен
@@ -56,12 +68,12 @@ namespace SpellChecker
                             hasOneEditDistSubst = true;
                             substs = "{";
                         }
-                        substs += dictword + ", ";
+                        substs += dictword + " ";
                         break;
                     case 2:
                         if (!hasOneEditDistSubst)
                         {
-                            substs += dictword + ", ";
+                            substs += dictword + " ";
                         }
                         break;
                     default: // -1
@@ -72,16 +84,19 @@ namespace SpellChecker
             if (substs == "{")
                 return "{" + word + "?}";
             else
-                return substs.TrimEnd().Contains(" ") ? substs.Substring(0, substs.Length - 2) + "}" : substs.Substring(1, substs.Length - 3);
+                return substs.TrimEnd().Contains(" ") ? substs.Substring(0, substs.Length - 1) + "}" : substs.Substring(1, substs.Length - 2);
         }
+
+
+
         /**
-         * Проверка, может ли проверяемое слово быть заменено на словарное с помощью не более чем двух правок.
-         * Если да, возвращает минимальное число правок. Если нет, -1.
-         * 
-         * Параметры:
-         * checkword: проверяемое слово
-         * dictword: словарное слово
-        */
+* Проверка, может ли проверяемое слово быть заменено на словарное с помощью не более чем двух правок.
+* Если да, возвращает минимальное число правок. Если нет, -1.
+* 
+* Параметры:
+* checkword: проверяемое слово
+* dictword: словарное слово
+*/
         public static int CanReplace(string checkword, string dictword)
         {
             if (checkword.Length - dictword.Length > 2 || checkword.Length - dictword.Length < -2) return -1;
@@ -103,9 +118,13 @@ namespace SpellChecker
                             return -1;
                 }
             // два пропущенных символа в конце слова
-            if (editDistances[len1, len2] == 2 && (len1 > 2 && editDistances[len1 - 2, len2] == 0 ||len2>2 && editDistances[len1, len2 - 2] == 0))
-                return -1;
-            return editDistances[len1, len2] < 3? editDistances[len1, len2] : -1;
+            if (editDistances[len1, len2] == 2)
+                if (len1 > 2 && editDistances[len1 - 2, len2] == 0 ||len2>2 && editDistances[len1, len2 - 2] == 0)
+                    return -1;
+            // два пропущенных символа перед еще одной буквой в слове
+                else if (len1 > 2 && editDistances[len1 - 3, len2] == 1 && editDistances[len1 - 2, len2] == 2 && editDistances[len1 - 1, len2] == 3 || len2 > 2 && editDistances[len1, len2 - 3] == 1 && editDistances[len1, len2 -2] == 2 && editDistances[len1, len2 - 1] == 3)
+                    return -1;
+                return editDistances[len1, len2] < 3? editDistances[len1, len2] : -1;
             
         }
 

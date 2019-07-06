@@ -8,14 +8,28 @@ namespace SpellChecker
 {
     public class SpellChecker
     {
+        /**
+         * Проверка строки на корректность написания слов
+         * text: строка
+         * dict: словарь
+        */
         public static string CheckText(string text, string[] dict)
         {
-            int alpha = 0, nonAlpha = 0;
+            int alpha = -1, nonAlpha = -1;
             string result = "";
-            for (int i = 0; i<text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
-                
+                if (char.IsLetter(text[i])) alpha = i;
+                else
+                {
+                    if (nonAlpha < alpha)
+                        result += CheckWord(text.Substring(nonAlpha + 1, alpha - nonAlpha), dict);
+                    nonAlpha = i;
+                    result += text[i];
+                }
             }
+            if (nonAlpha < alpha)
+                result += CheckWord(text.Substring(nonAlpha + 1, alpha - nonAlpha), dict);
             return result;
         }
         /**

@@ -1,9 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SpellChecker
 {
@@ -18,13 +16,51 @@ namespace SpellChecker
         }
 
         [Test]
+        public void NoCorrections()
+        {
+            Assert.That(SpellChecker.CheckWord("abcdefg", new string[] { "van", "abcdr" }), Is.EqualTo("{abcdefg?}"));
+        }
+
+        [Test]
+        public void OneEditCorrection()
+        {
+            Assert.That(SpellChecker.CheckWord("Abcde", new string[] { "van", "abcdef", "abcdf" }), Is.EqualTo("abcdef"));
+        }
+
+        [Test]
+        public void MoreThanOneEditCorrection()
+        {
+            Assert.That(SpellChecker.CheckWord("Three", new string[] { "van", "Tree", "Threek", "Threk", "sthree" }), Is.EqualTo("{Tree, Threek, sthree}"));
+        }
+
+        [Test]
+        public void MoreThanOneCorrectionWithEditDistTwo()
+        {
+            Assert.That(SpellChecker.CheckWord("Two", new string[] { "too", "tewot", "van", "three" }), Is.EqualTo("{too, tewot}"));
+        }
+
+        [Test]
+        public void MoreThanOneCorrectionWithEditDistTwoAndChangedOrderInDict()
+        {
+            Assert.That(SpellChecker.CheckWord("Two", new string[] { "tewot", "van", "too",  "three" }), Is.EqualTo("{tewot, too}"));
+        }
+
+        [Test]
+        public void WhiteSpaceAndOtherNonAlphabetMustBeIntact()
+        {
+            Assert.That(SpellChecker.CheckText("  one!\n  two-20\t'three apples'! ", new string[] {"apples", "too", "tree" }), Is.EqualTo("  {one?}!\n  too-20\t'tree apples'! "));
+        }
+
+
+
+        [Test]
         public void WordIsCorrectIfInDictionary()
         {
             Assert.That(SpellChecker.CanReplace("абвгдеж", "абвгдеж"), Is.EqualTo(0));
         }
 
         [TestCase("adef", "asdef", ExpectedResult = 1)]
-        [TestCase("adef", "asdsef", ExpectedResult = 2)]
+        [TestCase("adef", "asdefs", ExpectedResult = 2)]
         [TestCase("adef", "assdef", ExpectedResult = -1)]
         [TestCase("adef", "adefss", ExpectedResult = -1)]
         [TestCase("adef", "ssadef", ExpectedResult = -1)]

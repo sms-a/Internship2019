@@ -22,7 +22,7 @@ namespace MySpellChecker
         {
             if (str == null) return null;
             var len = str.Length;
-            if (n >= len-1) return "";
+            if (n >= len) return "";
 
             if (n <= 0) return str;
 
@@ -41,7 +41,7 @@ namespace MySpellChecker
             var len = str.Length;
 
             if (n <= 0) return "";
-            if (n >= len-1) return str;
+            if (n >= len) return str;
 
             return str.Substring(0, n);
         }

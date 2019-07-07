@@ -55,6 +55,8 @@
     <Compile Include="Interfaces\ICorrections.cs" />
     <Compile Include="Interfaces\IDictionaryLogic.cs" />
     <Compile Include="CorrectionsLogic.cs" />
+    <Compile Include="Interfaces\IInputOutput.cs" />
+    <Compile Include="IOStrings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />

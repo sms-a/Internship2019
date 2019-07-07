@@ -5,6 +5,7 @@ namespace MySpellChecker.Interfaces
     public interface IFormatStrings
     {
         string FormatStringToUnknown(string word);
-        string FormatStringsToFinalView(IEnumerable<string> words);
+        string FormatStringsToFamous(IEnumerable<string> words);
+        string ToFormatResultString(IEnumerable<string> words);
     }
 }

@@ -17,8 +17,9 @@ namespace SpellChecker
         public static string SpellCheck(string input)
         {
             string[] textAndDict = input.Split(new string[] { "===" }, StringSplitOptions.RemoveEmptyEntries);
-            string[] dict = textAndDict[0].Split(' ');
-            return CheckText(textAndDict[1].TrimStart('\n'), dict);
+            string[] dict = textAndDict[0].Split(' ', '\n', '\t');
+            if (textAndDict.Length < 2 || textAndDict[1].Trim().Length == 0) return "";
+            return CheckText(textAndDict[1].TrimStart('\n', '\r'), dict);
         }
 
         /**

@@ -13,3 +13,4 @@ F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\
 F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.csproj.GenerateResource.Cache
 F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.exe
 F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.pdb
+F:\Univers\практика\Internship2019\src\Smolev\SpellChecker\SpellChecker\obj\Debug\SpellChecker.csprojResolveAssemblyReference.cache

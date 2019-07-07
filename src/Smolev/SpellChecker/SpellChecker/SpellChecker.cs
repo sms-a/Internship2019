@@ -8,9 +8,11 @@ namespace SpellChecker
 {
     public class SpellChecker
     {
-        /**
+        /** <summary>
          * Исходный метод для проверки входного текста на правильность написанных слов
-         * Параметр input: входной текст, отформатированный в соответствии с заданием
+         * </summary>
+         * <param name="input">входной текст, отформатированный в соответствии с заданием: "словарь === проверяемый текст"</param>
+         * <returns>Результат проверки (string)</returns>
          */
         public static string SpellCheck(string input)
         {
@@ -20,9 +22,11 @@ namespace SpellChecker
         }
 
         /**
+         * <summary>
          * Проверка строки на корректность написания слов
-         * text: строка
-         * dict: словарь
+         * </summary>
+         * <param name="text">проверяемое слово</param>
+         * <param name="dict">массив словарных слов</param>
         */
         public static string CheckText(string text, string[] dict)
         {
@@ -44,12 +48,16 @@ namespace SpellChecker
             return result;
         }
 
-        /**
-         * Для заданного слова word с учетом словаря корректных слов dict ыозвращает
+        /** <summary>
+         * Для заданного слова word с учетом словаря корректных слов dict возвращает
          * это слово, если оно корректно, либо список возможных замен
+         * </summary>
+         * <param name="word">проверяемое слово</param>
+         * <param name="dict">массив словарных слов</param>
          */
         public static string CheckWord(string word, string[] dict)
         {
+
             if (word.Length > 50) return "{" + word + "?}"; // по условию, длина слова не больше 50, поэтому тест на дурака (если не сделать, CanReplace может зависнуть)
             string lWord = word.ToLower();
             bool hasOneEditDistSubst = false;
@@ -89,13 +97,13 @@ namespace SpellChecker
 
 
 
-        /**
+        /** <summary>
 * Проверка, может ли проверяемое слово быть заменено на словарное с помощью не более чем двух правок.
 * Если да, возвращает минимальное число правок. Если нет, -1.
+* </summary>
 * 
-* Параметры:
-* checkword: проверяемое слово
-* dictword: словарное слово
+* <param name="checkword">проверяемое слово</param>
+* <param name="dictword">словарное слово</param>
 */
         public static int CanReplace(string checkword, string dictword)
         {
@@ -122,9 +130,9 @@ namespace SpellChecker
                 if (len1 > 2 && editDistances[len1 - 2, len2] == 0 ||len2>2 && editDistances[len1, len2 - 2] == 0)
                     return -1;
             // два пропущенных символа перед еще одной буквой в слове
-                else if (len1 > 2 && editDistances[len1 - 3, len2] == 1 && editDistances[len1 - 2, len2] == 2 && editDistances[len1 - 1, len2] == 3 || len2 > 2 && editDistances[len1, len2 - 3] == 1 && editDistances[len1, len2 -2] == 2 && editDistances[len1, len2 - 1] == 3)
+                else if (len1 > 2 && editDistances[len1 - 3, len2] == 1 && editDistances[len1 - 1, len2] == 3 || len2 > 2 && editDistances[len1, len2 - 3] == 1 &&  editDistances[len1, len2 - 1] == 3)
                     return -1;
-                return editDistances[len1, len2] < 3? editDistances[len1, len2] : -1;
+            return editDistances[len1, len2] < 3? editDistances[len1, len2] : -1;
             
         }
 

@@ -61,6 +61,12 @@ namespace SpellChecker.Tests
         }
 
         [Test]
+        public void SimpleSpellCheckTest()
+        {
+            Assert.That(SpellChecker.SpellCheck("rain spain===rain spain==="), Is.EqualTo("rain spain"));
+        }
+
+        [Test]
         public void TextbookExample()
         {
             Assert.That(SpellChecker.SpellCheck("rain spain plain plaint pain main mainly the in on fall falls his was ===\nhte rame in pain fells mainy oon teh lain was hints pliant ==="), Is.EqualTo("the {rame?} in pain falls {main mainly} on the plain was {hints?} plaint "));

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MySpellChecker
+﻿namespace MySpellChecker
 {
     // Расширения для класса String.
     /// <summary>
@@ -28,6 +22,7 @@ namespace MySpellChecker
 
             return str.Substring(n, (len - n) );
         }
+
         /// <summary>
         /// Returns part of a string starting from the beginning to the specified position.
         /// </summary>

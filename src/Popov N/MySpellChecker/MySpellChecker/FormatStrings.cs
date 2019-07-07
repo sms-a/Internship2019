@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MySpellChecker.Interfaces;
 
 namespace MySpellChecker
@@ -14,7 +11,7 @@ namespace MySpellChecker
             return "{" + word + "?}";
         }
 
-        public string FormatStringsToFinalView(IEnumerable<string> words)
+        public string FormatStringsToFamous(IEnumerable<string> words)
         {
             string output = "{";
             if (words.Count() == 1) return words.First();
@@ -23,6 +20,14 @@ namespace MySpellChecker
                 output += word + " ";
             }
             return output.Trim() + "}";
+        }
+
+        public string ToFormatResultString(IEnumerable<string> words)
+        {
+            string result = "";
+            foreach (string word in words)
+                result += word + " ";
+            return result.Trim(' ');
         }
     }
 }

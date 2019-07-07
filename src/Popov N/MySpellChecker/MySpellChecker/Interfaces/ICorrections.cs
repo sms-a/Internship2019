@@ -1,8 +1,10 @@
-﻿namespace MySpellChecker.Interfaces
+﻿using System.Collections.Generic;
+
+namespace MySpellChecker.Interfaces
 {
     public interface ICorrections
     {
         string Correct(string word);
-        string Alphabet { get; set; }
+        string Correct(IEnumerable<string> words);
     }
 }

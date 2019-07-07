@@ -8,11 +8,12 @@ namespace MySpellChecker
     {
         private readonly Dictionary<string, int> _dictionary;
 
-        public DictionaryLogic(IEnumerable<string> sample)
+        public string Alphabet { get; set; }
+
+        public DictionaryLogic(IEnumerable<string> wordsToDictionary, string alphabet)
         {
-            _dictionary = sample.Select(w => w) 
-                .GroupBy(w => w)
-                .ToDictionary(w => w.Key, w => w.Count());
+            _dictionary = wordsToDictionary.Select(w => w).GroupBy(w => w).ToDictionary(g => g.Key, g => g.Count());
+            Alphabet = alphabet;
         }
 
         public bool Contains(string word)

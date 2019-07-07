@@ -16,12 +16,9 @@ namespace MySpellChecker
             public bool isDelete;
         }
 
-        public string Alphabet { get; set; }
-
-        public CorrectionsLogic(IDictionaryLogic dictionaryLogic,IFormatStrings formatStrings,string alphabet)
+        public CorrectionsLogic(IDictionaryLogic dictionaryLogic,IFormatStrings formatStrings)
         {
             _dictionaryLogic = dictionaryLogic;
-            Alphabet = alphabet;
             _formatStrings = formatStrings;
         }
 
@@ -30,10 +27,16 @@ namespace MySpellChecker
             // Found
             if (_dictionaryLogic.Contains(word)) return  word;
             // Changed
-            // if(Corrections(word, out var tmpList)) return _formatStrings.FormatStringsToFinalView(tmpList); Corrections
-            if (Corrections(word, out var tmpList)) return _formatStrings.FormatStringsToFinalView(tmpList);
+            if (Corrections(word, out var tmpList)) return _formatStrings.FormatStringsToFamous(tmpList);
             //Not Found
             return _formatStrings.FormatStringToUnknown(word);
+        }
+
+        public string Correct(IEnumerable<string> words)
+        {
+            var resultCorrected = from word in words select Correct(word);
+
+            return _formatStrings.ToFormatResultString(resultCorrected);
         }
 
         private bool Corrections(string word, out IEnumerable<string> outputEnumerable)
@@ -41,7 +44,7 @@ namespace MySpellChecker
             var editsEnumerable = GetEditsEnumerable(word);
 
             // 1 Edit
-            var firstEdits = _dictionaryLogic.GetKnownWordsInDictionary(getStringsEnumerable(editsEnumerable));
+            var firstEdits = _dictionaryLogic.GetKnownWordsInDictionary(GetStringsEnumerable(editsEnumerable));
             if (firstEdits.Any())
             {
                 outputEnumerable = firstEdits.Distinct();
@@ -76,33 +79,33 @@ namespace MySpellChecker
                 select new StrEdit() {str = s.a + s.b.From(1),indx = s.a.Length, isDelete = true};
 
            var inserts = from s in enumerable
-                from c in Alphabet
-                select new StrEdit(){ str = (s.a + c + s.b), indx = s.a.Length};
+                from c in _dictionaryLogic.Alphabet
+                         select new StrEdit(){ str = (s.a + c + s.b), indx = s.a.Length};
 
             return deletes.Concat(inserts);
         }
 
-        private IEnumerable<string> InsertsEnumerable(string word, int indx, bool isCorrect)
+        private IEnumerable<string> InsertsEnumerable(string word, int index, bool isCorrect)
         {
             var splits = from i in Enumerable.Range(0, word.Length+1)
                 select new { a = word.To(i), b = word.From(i) };
             if (isCorrect)
             {
                 var inserts = from s in splits
-                    from c in Alphabet
-                    where s.a.Length != indx && s.a.Length != indx + 1
+                    from c in _dictionaryLogic.Alphabet
+                              where s.a.Length != index && s.a.Length != index + 1
                     select s.a + c + s.b;
                 return inserts;
             }
             else {
                 var inserts = from s in splits
-                    from c in Alphabet
-                    select s.a + c + s.b;
+                    from c in _dictionaryLogic.Alphabet
+                              select s.a + c + s.b;
                 return inserts;
             }
         }
 
-        private IEnumerable<string> DeletesEnumerable(string word, int indx, bool isCorrect)
+        private IEnumerable<string> DeletesEnumerable(string word, int index, bool isCorrect)
         {
             var splits = from i in Enumerable.Range(0, word.Length+1)
                 select new { a = word.To(i), b = word.From(i)};
@@ -110,7 +113,7 @@ namespace MySpellChecker
             if (isCorrect)
             {
                 var deletes = from s in splits
-                    where s.b != "" && (s.a.Length!= indx && s.a.Length != indx - 1)
+                    where s.b != "" && (s.a.Length!= index && s.a.Length != index - 1)
                     select s.a + s.b.From(1);
                 return deletes;
             }
@@ -123,7 +126,7 @@ namespace MySpellChecker
             }
         }
 
-        private IEnumerable<string> getStringsEnumerable(IEnumerable<StrEdit> strStructs)
+        private IEnumerable<string> GetStringsEnumerable(IEnumerable<StrEdit> strStructs)
         {
             return from strStruct in strStructs select strStruct.str;
         }

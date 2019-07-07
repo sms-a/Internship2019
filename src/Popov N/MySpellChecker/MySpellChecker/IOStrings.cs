@@ -41,7 +41,10 @@ namespace MySpellChecker
                 string str = Console.ReadLine();
                 if (str != null)
                 {
-                    if (str.Contains(_separator)) exit = true;
+                    if (str.Contains(_separator)) {
+                        exit = true;
+                        str = str.Replace(_separator, "");
+                    }
                     string[] words = str.Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries);
                     returnList = returnList.Concat(words.ToList());
                 }

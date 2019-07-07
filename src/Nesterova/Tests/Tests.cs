@@ -34,13 +34,36 @@ namespace Tests
             Assert.Equal("sadness", checker.GetCorrectWord(word));
         }
         [Fact]
-        public void WordHaveFewCorrectVariatWithOneEdit()
+        public void WordHaveFewCorrectVariatsWithOneEdit()
         {
             string word = "sdness";
             List<string> dictionary = new List<string>() { "sadness", "sness", "sodness", "a", "awful" };
             var checker = new SpellChecker.Checker(dictionary);
             Assert.Equal("{ sadness sness sodness }", checker.GetCorrectWord(word));
         }
-
+        [Fact]
+        public void WordHaveOneCorrectVariantWhithTwoEdits()
+        {
+            string word = "sness";
+            List<string> dictionary = new List<string>() { "sadness", "july", "empty", "a", "awful" };
+            var checker = new SpellChecker.Checker(dictionary);
+            Assert.Equal("sadness", checker.GetCorrectWord(word));
+        }
+        [Fact]
+        public void WordHaveCorrectVariantWithOneOrTwoEdits()
+        {
+            string word = "sdness";
+            List<string> dictionary = new List<string>() { "sadness", "sjness", "empty", "a", "awful" };
+            var checker = new SpellChecker.Checker(dictionary);
+            Assert.Equal("sadness", checker.GetCorrectWord(word));
+        }
+        [Fact]
+        public void WordHaveFewCorrectVariantsWhithTwoEdits()
+        {
+            string word = "sness";
+            List<string> dictionary = new List<string>() { "sadness", "sjaness", "empty", "a", "awful" };
+            var checker = new SpellChecker.Checker(dictionary);
+            Assert.Equal("{ sadness sjaness }", checker.GetCorrectWord(word));
+        }
     }
 }

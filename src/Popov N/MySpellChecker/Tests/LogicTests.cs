@@ -50,7 +50,7 @@ namespace Tests
                 output += correctionsLogic.Correct(s)+" ";
             }
             
-            Assert.AreEqual("the {rame?} in pain falls {main mainly} on the plain was {hints?}", output.Trim(' '));
+            Assert.AreEqual("the {rame?} in pain falls {main mainly} on the plain was {hints?} plaint", output.Trim(' '));
 
         }
 
@@ -82,7 +82,33 @@ namespace Tests
             Assert.AreEqual("{spain paint}", testString);
         }
 
+        [Test]
+        public void InsertsDoubleWordNotFound()
+        {
+            List<string> inputDictionary = new List<string>() { "spain", "plaint", "paint" };
+            string word = "spn";
+            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary);
+            IFormatStrings formatStrings = new FormatStrings();
+            CorrectionsLogic correctionsLogic = new CorrectionsLogic(dictionaryLogic, formatStrings, _alphabetUS);
 
+            string testString = correctionsLogic.Correct(word);
+
+            Assert.AreEqual("{spn?}", testString);
+        }
+
+        [Test]
+        public void DeletesDoubleWordNotFound()
+        {
+            List<string> inputDictionary = new List<string>() { "spain", "plaint", "paint" };
+            string word = "spaitrn";
+            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary);
+            IFormatStrings formatStrings = new FormatStrings();
+            CorrectionsLogic correctionsLogic = new CorrectionsLogic(dictionaryLogic, formatStrings, _alphabetUS);
+
+            string testString = correctionsLogic.Correct(word);
+
+            Assert.AreEqual("{spaitrn?}", testString);
+        }
         public static  void Main() { }
     }
 }

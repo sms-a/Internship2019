@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-@Component
+@Component(ConsoleController.NAME)
 public class ConsoleController {
 
     public static final String NAME = "checker_ConsoleController";

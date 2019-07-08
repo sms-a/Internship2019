@@ -39,61 +39,50 @@ namespace SpellChecker
         string FindWordsWihEdits(string word)
         {
             List<string> correctWords = new List<string>();
-            List<string> wordsWithOneEdit = GenerateWordsWithOneEdit(word);
-            foreach (string w in dictionary)
-                if (wordsWithOneEdit.Contains(w))
-                    correctWords.Add(w);
-            if (correctWords.Count < 1) {
-                List<string> wordsWithTwoEdits = GenerateWordWithTwoEdits(wordsWithOneEdit);
-                foreach (string w in dictionary)
-                    if (wordsWithTwoEdits.Contains(w))
-                        correctWords.Add(w);
+            foreach (string corWord in dictionary)
+            {
+                if (Math.Abs(corWord.Length - word.Length) > 2) continue;
+                if (GetLevenshteinDistance(corWord, word) == 1)
+                    correctWords.Add(corWord);
             }
+            if (correctWords.Count==0)
+                foreach (string corWord in dictionary)
+                {
+                    if (Math.Abs(corWord.Length - word.Length) > 2) continue;
+                    if (GetLevenshteinDistance(corWord, word) == 2)
+                        correctWords.Add(corWord);
+                }
             string corrWord = "";
             if (correctWords.Count == 0) return corrWord;
-            if (correctWords.Count == 1) return corrWord = correctWords[0];
+            if (correctWords.Count == 1) return correctWords[0];
             corrWord += "{";
             foreach (string w in correctWords)
                 corrWord += w + " ";
             return corrWord.Substring(0,corrWord.Length-1) +"}";
         }
-        List<string> GenerateWordsWithOneEdit(string word)
+        public int GetLevenshteinDistance(string word1, string word2) 
         {
-            List<string> wordsWithOneEdit = new List<string>();
-            for (int i = 0; i < word.Length; i++)
+            int dist;
+            int[,] m = new int[word1.Length + 1, word2.Length + 1];
+            for (int i = 0; i <= word1.Length; i++)
             {
-                string newWord = word.Substring(0, i) + word.Substring(i + 1, word.Length - i - 1);
-                if (!wordsWithOneEdit.Contains(newWord)) wordsWithOneEdit.Add(newWord);
+                m[i, 0] = i;
             }
-            for (int i = 0; i <= word.Length; i++)
+            for (int j = 0; j <= word2.Length; j++)
             {
-                foreach (char letter in alpa)
+                m[0, j] = j;
+            }
+            for (int i = 1; i <= word1.Length; i++)
+            {
+                for (int j = 1; j <= word2.Length; j++)
                 {
-                    string newWord = word.Substring(0, i) + letter + word.Substring(i, word.Length - i);
-                    if (!wordsWithOneEdit.Contains(newWord)) wordsWithOneEdit.Add(newWord);
+                    dist = (word1[i - 1] == word2[j - 1]) ? 0 : 2;
+
+                    m[i, j] = Math.Min(Math.Min(m[i - 1, j] + 1,
+                                             m[i, j - 1] + 1),
+                                             m[i - 1, j - 1] + dist);
                 }
             }
-            return wordsWithOneEdit;
-        }
-        List<string> GenerateWordWithTwoEdits(List<string> wordsWithOneEdit)
-        {
-            List<string> wordsWithTwoEdits = new List<string>();
-            foreach(string word in wordsWithOneEdit)
-            {
-                for (int i = 0; i < word.Length; i++)
-                {
-                    string newWord = word.Substring(0, i) + word.Substring(i + 1, word.Length - i - 1);
-                    if (!wordsWithTwoEdits.Contains(newWord)) wordsWithTwoEdits.Add(newWord);
-                }
-                for (int i = 0; i <= word.Length; i++)
-                {
-                    foreach (char letter in alpa)
-                    {
-                        string newWord = word.Substring(0, i) + letter + word.Substring(i, word.Length - i);
-                        if (!wordsWithTwoEdits.Contains(newWord)) wordsWithTwoEdits.Add(newWord);
-                    }
-                }
-            }
-            return wordsWithTwoEdits;
-        }
+            return m[word1.Length, word2.Length];
+        } 
     }}

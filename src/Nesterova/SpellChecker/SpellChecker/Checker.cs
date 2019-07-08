@@ -6,15 +6,27 @@ namespace SpellChecker
 {
     public class Checker
     {
-        string alpa = "abcdefghijklmnopqrstuvwxyz";
+        string alpa = "";
         List<string> dictionary;
         public Checker(List<string> dictionary)
         {
             this.dictionary = dictionary;
+            GenerateAlpha();
         }
+
+        private void GenerateAlpha()
+        {
+            foreach (string word in dictionary)
+                for (int i = 0; i < word.Length; i++)
+                    if (!alpa.Contains(word[i]))
+                        alpa += word[i];
+        }
+
         public string GetCorrectWord(string word)
         {
-            if (dictionary.Contains(word.ToLower())) return word;
+            if (word.Equals("===")) return "";
+            if (word.Length > 50) return word;
+            if (dictionary.Contains(word)) return word;
             string correctWord = FindWordsWihEdits(word);
             if (correctWord.Length > 0) return correctWord;
             return IncorrectWord(word);
@@ -40,10 +52,10 @@ namespace SpellChecker
             string corrWord = "";
             if (correctWords.Count == 0) return corrWord;
             if (correctWords.Count == 1) return corrWord = correctWords[0];
-            corrWord += "{ ";
+            corrWord += "{";
             foreach (string w in correctWords)
                 corrWord += w + " ";
-            return corrWord+"}";
+            return corrWord.Substring(0,corrWord.Length-1) +"}";
         }
         List<string> GenerateWordsWithOneEdit(string word)
         {

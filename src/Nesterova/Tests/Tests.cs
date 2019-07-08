@@ -19,8 +19,7 @@ namespace Tests
         public void WordIsNotCorrect()
         {
             string word = "sad";
-            List<string> dictionary = new List<string>();
-            dictionary.Add("sadness");
+            List<string> dictionary = new List<string>() {"sadness"};
             var checker = new SpellChecker.Checker(dictionary);
             string result = "{" + word + "?}";
             Assert.Equal(result, checker.GetCorrectWord(word));
@@ -39,7 +38,7 @@ namespace Tests
             string word = "sdness";
             List<string> dictionary = new List<string>() { "sadness", "sness", "sodness", "a", "awful" };
             var checker = new SpellChecker.Checker(dictionary);
-            Assert.Equal("{ sadness sness sodness }", checker.GetCorrectWord(word));
+            Assert.Equal("{sadness sness sodness}", checker.GetCorrectWord(word));
         }
         [Fact]
         public void WordHaveOneCorrectVariantWhithTwoEdits()
@@ -63,7 +62,23 @@ namespace Tests
             string word = "sness";
             List<string> dictionary = new List<string>() { "sadness", "sjaness", "empty", "a", "awful" };
             var checker = new SpellChecker.Checker(dictionary);
-            Assert.Equal("{ sadness sjaness }", checker.GetCorrectWord(word));
+            Assert.Equal("{sadness sjaness}", checker.GetCorrectWord(word));
+        }
+        [Fact]
+        public void ChechingWordIsSoLong()
+        {
+            string word = "asfmjshguwehioqwufuwgvuwreufhwedjhgaygdjahbfuagufgqwfvyuqfvyqwfgyqw";
+            List<string> dictionary = new List<string>();
+            var checker = new SpellChecker.Checker(dictionary);
+            Assert.Equal(word, checker.GetCorrectWord(word));
+        }
+        [Fact]
+        public void InputIsCaseinsensitive()
+        {
+            string word = "MAiN";
+            List<string> dictionary = new List<string>() {"main"};
+            var checker = new SpellChecker.Checker(dictionary);
+            Assert.Equal("{MAiN?}", checker.GetCorrectWord(word));
         }
     }
 }

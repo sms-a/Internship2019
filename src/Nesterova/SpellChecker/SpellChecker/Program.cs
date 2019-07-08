@@ -7,7 +7,6 @@ namespace SpellChecker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             string input = "";
             List<string> dictionary = new List<string>();
             do
@@ -17,7 +16,7 @@ namespace SpellChecker
                 {
                     dictionary.AddRange(input.Split(' '));
                 }
-            } while (!input.EndsWith(" ==="));
+            } while (!input.EndsWith("==="));
             var checker = new Checker(dictionary);
             List<string> text = new List<string>();
             input = "";
@@ -28,7 +27,7 @@ namespace SpellChecker
                 {
                     text.AddRange(input.Split(' '));
                 }
-            } while (!input.EndsWith(" ==="));
+            } while (!input.EndsWith("==="));
             foreach (string word in text)
             {
                 Console.Write(checker.GetCorrectWord(word)+" ");

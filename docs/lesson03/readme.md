@@ -10,6 +10,7 @@
   - [Автоматизация приемочного тестирования Selenium + .NET Web Api + AngularJs](https://habr.com/post/221169/)
   - [Вебинар: Как создавать локаторы для Selenium WebDriver](https://habr.com/post/144063/)
 - Разработать приемочные тесты для сайта https://ssau.ru
+  - В качестве примера взять код [репозитория](https://github.com/treshnikov/acceptance-testing-demo)  
   - Разработать PageObject для главной страницы сайта и страницы с расписанием занятий https://ssau.ru/rasp
   - Разработать тест, проверяющий наличие расписания по вашему курсу
   

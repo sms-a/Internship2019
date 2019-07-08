@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MySpellChecker;
+﻿using MySpellChecker;
 using MySpellChecker.Interfaces;
 using NUnit.Framework;
 

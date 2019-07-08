@@ -9,6 +9,8 @@ namespace Tests
     public class LogicTests
     {
         private IFormatStrings _formatStrings;
+        private IDictionaryLogic _dictionaryLogic;
+        private ICorrections _correctionsLogic;
         private string _alphabetUS = "abcdefghijklmnopqrstuvwxyz";
 
         [SetUp]
@@ -18,45 +20,17 @@ namespace Tests
         }
 
         [Test]
-        [TestCase("plain")]
-        [TestCase("spain")]
-        [TestCase("rain")]
-        [TestCase("plaint")]
-        public void ContainsWordToDictionary(string inputWord)
-        {
-            List<string> inputDictionary = new List<string>() { "rain", "spain", "plain" , "plaint"};
-            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary,_alphabetUS);
-
-            bool isContains = dictionaryLogic.Contains(inputWord);
-
-            Assert.That(isContains,Is.EqualTo(true));
-        }
-
-        [Test]
-        [TestCase("in")]
-        [TestCase("stpain")]
-        public void NotContainsWordToDictionary(string inputWord)
-        {
-            List<string> inputDictionary = new List<string>() { "rain", "spain", "plain", "plaint" };
-            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary,_alphabetUS);
-
-            bool isContains = dictionaryLogic.Contains(inputWord);
-
-            Assert.That(isContains, Is.EqualTo(false));
-        }
-
-        [Test]
         public void OutputTrueString()
         {
             List<string> inputDictionary = new List<string>(){ "rain", "spain", "plain", "plaint", "pain", "main", "mainly", "the", "in", "on", "fall", "falls", "his", "was"};
             List<string> wordsArrayList = new List<string>() { "hte", "rame", "in", "pain", "fells", "mainy", "oon", "teh", "lain", "was", "hints", "pliant" };
-            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
-            CorrectionsLogic correctionsLogic = new CorrectionsLogic(dictionaryLogic,_formatStrings);
+            _dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
+            _correctionsLogic = new CorrectionsLogic(_dictionaryLogic,_formatStrings);
 
             string output = "";
             foreach (string s in wordsArrayList)
             {
-                output += correctionsLogic.Correct(s)+" ";
+                output += _correctionsLogic.Correct(s)+" ";
             }
             
             Assert.That(output.Trim(' '), Is.EqualTo("the {rame?} in pain falls {main mainly} on the plain was {hints?} plaint"));
@@ -70,10 +44,10 @@ namespace Tests
         public void ReturnAnUnknownWord(string wordUnknown)
         {
             List<string> inputDictionary = new List<string>() { "rain", "spain", "plain", "plaint", "pain", "main", "mainly", "the", "in", "on", "fall", "falls", "his", "was" };
-            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
-            CorrectionsLogic correctionsLogic = new CorrectionsLogic(dictionaryLogic, _formatStrings);
+            _dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
+            _correctionsLogic = new CorrectionsLogic(_dictionaryLogic, _formatStrings);
 
-            string testString = correctionsLogic.Correct(wordUnknown);
+            string testString = _correctionsLogic.Correct(wordUnknown);
 
             Assert.AreEqual("{"+wordUnknown+"?}", testString);
         }
@@ -83,10 +57,10 @@ namespace Tests
         {
             List<string> inputDictionary = new List<string>() {  "spain", "plaint", "paint"};
             string word = "ptain";
-            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
-            CorrectionsLogic correctionsLogic = new CorrectionsLogic(dictionaryLogic, _formatStrings);
+            _dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
+            _correctionsLogic = new CorrectionsLogic(_dictionaryLogic, _formatStrings);
 
-            string testString = correctionsLogic.Correct(word);
+            string testString = _correctionsLogic.Correct(word);
 
             Assert.AreEqual("{spain paint}", testString);
         }
@@ -98,10 +72,10 @@ namespace Tests
         public void InsertsDoubleWordNotFound(string word)
         {
             List<string> inputDictionary = new List<string>() { "spain", "plaint", "paint" };
-            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
-            CorrectionsLogic correctionsLogic = new CorrectionsLogic(dictionaryLogic, _formatStrings);
+            _dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
+            _correctionsLogic = new CorrectionsLogic(_dictionaryLogic, _formatStrings);
 
-            string testString = correctionsLogic.Correct(word);
+            string testString = _correctionsLogic.Correct(word);
 
             Assert.That(testString,Is.EqualTo("{"+word+"?}"));
         }
@@ -113,10 +87,10 @@ namespace Tests
         public void DeletesDoubleWordNotFound(string word)
         {
             List<string> inputDictionary = new List<string>() { "spain", "plaint", "paint" };
-            DictionaryLogic dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
-            CorrectionsLogic correctionsLogic = new CorrectionsLogic(dictionaryLogic, _formatStrings);
+            _dictionaryLogic = new DictionaryLogic(inputDictionary, _alphabetUS);
+            _correctionsLogic = new CorrectionsLogic(_dictionaryLogic, _formatStrings);
 
-            string testString = correctionsLogic.Correct(word);
+            string testString = _correctionsLogic.Correct(word);
 
             Assert.That(testString, Is.EqualTo("{" + word + "?}"));
         }

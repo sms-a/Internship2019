@@ -11,6 +11,7 @@ namespace MySpellChecker
     {
         private string _separator = "===";
         private string _alphabet = "abcdefghijklmnopqrstuvwxyz";
+        private int _maxCountWordLength = 50;
 
         public string GetAlphabet()
         {
@@ -46,7 +47,7 @@ namespace MySpellChecker
                         str = str.Replace(_separator, "");
                     }
                     string[] words = str.Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries);
-                    returnList = returnList.Concat(words.ToList());
+                    returnList = returnList.Concat(words.ToList()).Where(w => w.Length <= _maxCountWordLength);
                 }
             }
 

@@ -1,8 +1,8 @@
-package com.company.spellchecker;
+package com.company.spellchecker.api.interpreter;
 
 public interface SpellCheckInterpreter {
 
     String NAME = "checker_SpellCheckInterpreter";
 
-    String interpretText(String dictionary, String text);
+    String interpretText(String[] args);
 }

@@ -1,0 +1,18 @@
+ .gradle
+/build/
+gradle-app.setting
+
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.idea_modules/
+
+*.class
+.mtj.tmp/
+*.jar
+*.war
+*.ear
+
+target/

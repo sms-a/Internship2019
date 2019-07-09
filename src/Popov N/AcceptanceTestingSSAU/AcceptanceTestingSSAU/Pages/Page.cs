@@ -3,27 +3,54 @@ using OpenQA.Selenium;
 
 namespace AcceptanceTestingSSAU.Pages
 {
-    class Page
+    abstract class Page
     {
-        private IWebDriver driver;
+        protected IWebDriver Driver { get; private set; }
 
         public Page(IWebDriver driver, double timeOut = 10.0)
         {
-            this.driver = driver;
-           // this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeOut);
-           // this.driver.Manage().Window.Maximize();
+            Driver = driver;
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeOut);
+            Driver.Manage().Window.Maximize();
         }
 
-        public IWebElement FindElementByXPath(string css)
+        public IWebElement FindElementByXPath(string xPath)
         {
-            //IWebElement el;
+            IWebElement el;
+            try
+            {
+                el = Driver.FindElement(By.XPath(xPath));
+            }
+            catch (NoSuchElementException ex)
+            {
+                throw new NoSuchElementException(
+                    $"XPath selector = \"{xPath}\"\n",
+                    ex);
+            }
 
-           // return el;
+            return el;
+        }
+
+        public IWebElement FindElementByCss(string css)
+        {
+            IWebElement el;
+            try
+            {
+                el = Driver.FindElement(By.CssSelector(css));
+            }
+            catch (NoSuchElementException ex)
+            {
+                throw new NoSuchElementException(
+                    $"CSS selector = \"{css}\"\n",
+                    ex);
+            }
+
+            return el;
         }
 
         public void OpenPage(string pagePath)
         {
-            //driver.Navigate().GoToUrl(pagePath);
+            Driver.Navigate().GoToUrl(pagePath);
         }
 
     }

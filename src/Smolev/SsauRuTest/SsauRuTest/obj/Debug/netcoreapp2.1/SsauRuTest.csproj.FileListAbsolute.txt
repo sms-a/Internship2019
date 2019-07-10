@@ -9,3 +9,6 @@ F:\Univers\практика\Internship2019\src\Smolev\SsauRuTest\SsauRuTest\obj\
 F:\Univers\практика\Internship2019\src\Smolev\SsauRuTest\SsauRuTest\obj\Debug\netcoreapp2.1\SsauRuTest.csproj.CoreCompileInputs.cache
 F:\Univers\практика\Internship2019\src\Smolev\SsauRuTest\SsauRuTest\obj\Debug\netcoreapp2.1\SsauRuTest.AssemblyInfoInputs.cache
 F:\Univers\практика\Internship2019\src\Smolev\SsauRuTest\SsauRuTest\obj\Debug\netcoreapp2.1\SsauRuTest.AssemblyInfo.cs
+F:\Univers\практика\Internship2019\src\Smolev\SsauRuTest\SsauRuTest\bin\Debug\netcoreapp2.1\SsauRuTest.pdb
+F:\Univers\практика\Internship2019\src\Smolev\SsauRuTest\SsauRuTest\obj\Debug\netcoreapp2.1\SsauRuTest.dll
+F:\Univers\практика\Internship2019\src\Smolev\SsauRuTest\SsauRuTest\obj\Debug\netcoreapp2.1\SsauRuTest.pdb

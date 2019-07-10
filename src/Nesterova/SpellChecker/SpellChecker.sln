@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpellChecker", "SpellChecker\SpellChecker.csproj", "{2C6ED7ED-C675-4AD2-8DD3-94440A366C6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellChecker", "SpellChecker\SpellChecker.csproj", "{2C6ED7ED-C675-4AD2-8DD3-94440A366C6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests.csproj", "{8B81986A-A8D4-41BA-BFAF-38EB7C023D64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "..\Tests\Tests.csproj", "{8B81986A-A8D4-41BA-BFAF-38EB7C023D64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuisinessLogic", "..\BuisinessLogic\BuisinessLogic.csproj", "{30CAA793-C7ED-4498-8EFE-5D814B7B8D22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8B81986A-A8D4-41BA-BFAF-38EB7C023D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B81986A-A8D4-41BA-BFAF-38EB7C023D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B81986A-A8D4-41BA-BFAF-38EB7C023D64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30CAA793-C7ED-4498-8EFE-5D814B7B8D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30CAA793-C7ED-4498-8EFE-5D814B7B8D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30CAA793-C7ED-4498-8EFE-5D814B7B8D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30CAA793-C7ED-4498-8EFE-5D814B7B8D22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

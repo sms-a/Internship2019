@@ -20,7 +20,8 @@ namespace AcceptanceTestingSSAU
 
 
         [Test]
-        public void SsauStartPageShouldOpen()
+        [TestCase("href", @"https://ssau.ru/student/")]
+        public void SsauStartPageShouldOpen(string attribute, string valueOfAttribute)
         {
             using (_driver)
             {
@@ -28,39 +29,45 @@ namespace AcceptanceTestingSSAU
 
                 var element = startPage.ToStudent;
 
-                Assert.That(element.GetAttribute("href"), Is.EqualTo(@"/student/"));
-            }
-        }
-
-        [Test]
-        public void SsauToStudentPageShouldOpen()
-        {
-            using (_driver)
-            {
-                var startPage = new SsauStartPage(_driver);
-                var toStudentPage = startPage.OpenToStudentPage();
-
-                var element = toStudentPage.Timetable;
-
-                Assert.That(element.GetAttribute("href"), Is.EqualTo("/rasp/"));
+                Assert.That(element.GetAttribute(attribute), Is.EqualTo(valueOfAttribute));
             }
         }
 
         [Test]
         public void SsauSelectTimetablePageShouldOpen()
         {
-            string groupNumber = "6213-020302D";
-
             using (_driver)
             {
                 var startPage = new SsauStartPage(_driver);
-                var toStudentPage = startPage.OpenToStudentPage();
-                var selectTimeTablePage = toStudentPage.OpenTimetable();
+                var toStudentPage = startPage.OpenSelectTimetablePage();
 
-                var groupTimetablePage = selectTimeTablePage.OpenSelectedGroup(groupNumber);
-                var element = groupTimetablePage.TablePanElement.FindElement(By.CssSelector("body"));
+                var classAttribute = toStudentPage.SearchGroupElement.GetAttribute("class");
 
-                Assert.That(element, Is.TypeOf<IWebElement>());
+                Assert.That(classAttribute, Is.EqualTo("select2-selection__placeholder"));
+            }
+        }
+
+        [Test]
+        [TestCase("6213-020302D")]
+        public void SsauGroupTimetablePageShouldOpen(string groupNumber)
+        {
+            using (_driver)
+            {
+                var startPage = new SsauStartPage(_driver);
+                var selectTimeTablePage = startPage.OpenSelectTimetablePage();
+
+                //var groupTimetablePage = selectTimeTablePage.OpenSelectedGroup(groupNumber);
+
+                /* Это альтернатива верхней закоментированной строке.
+                 Причина: невозможность перейти на страницу группы закоментированным путем. 
+                 События нажатия Enter и клика мышью по форме не обрабатываются сайтом*/
+                var groupTimetablePage = new SsauGroupTimetablePage(_driver);
+                selectTimeTablePage.OpenPage("https://ssau.ru/rasp?group="+ groupNumber);
+                /* */
+
+                var tableElement = groupTimetablePage.TablePanel.FindElement(By.XPath("*[@id=\"content1\"]"));
+
+                Assert.That(tableElement, Is.EqualTo(groupTimetablePage.TablePanElement));
             }
         }
 

@@ -7,11 +7,10 @@ namespace AcceptanceTestingSSAU.Pages
 {
     class SsauToStudentPage:Page
     {
-        public IWebElement Timetable => FindElementByCss("body > div.container > div.body1-text > ul > li:nth - child(1) > a");
+        public IWebElement Timetable => FindElementByCss("body > div.container > div.body1-text > ul > li:nth-child(1) > a");
 
         public SsauToStudentPage(IWebDriver driver, double timeOut = 10) : base(driver, timeOut)
         {
-            
         }
 
         public SsauSelectTimetablePage OpenTimetable()

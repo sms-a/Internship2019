@@ -23,7 +23,7 @@ namespace SsauRuTest
         [TestMethod]
         [DataRow("631", DisplayName = "Номер группы не введен полностью")]
         [DataRow("63131", DisplayName = "Нет такой группы")]
-        [DataRow("4101", DisplayName = "Более одной группы с таким номером либо имеется более одного расписания для данной группы")]
+        [DataRow("4101", DisplayName = "Более одной группы с таким номером либо же более одного расписания для студентов данной группы")]
         public void TimetableShouldNotExistForNonexistingOrDuplicateGroups(string group)
         {
             var timetablePage = new TimetablePage(new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)), false);

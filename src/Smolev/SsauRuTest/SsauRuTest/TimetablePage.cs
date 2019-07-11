@@ -43,11 +43,12 @@ namespace SsauRuTest
             }
             // зато есть такие группы, у которых номер совпадает, а код специальности - нет (такие есть на 4 факультете)
 
+            // вводим номер группы в поле "Поиск группы"
             FindElementByCss(inputElementSelector).Click();
             var enterGroupNumElement = FindElementByCss(enterGroupNumElementSelector);
             enterGroupNumElement.SendKeys(group.ToString());
             IWait <IWebDriver> wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-            // ждем, пока сайт не обновит список и когда появится пункт с группой (иначе драйвер щелкнет по строке "Поиск..." и ничего не произойдет
+            // ждем, пока сайт не обновит список и когда появится пункт с группой (иначе драйвер щелкнет по строке "Поиск..." и ничего не произойдет)
             wait.Until(webDriver => !FindElementByCss(dropdownMenuSelectGroupElementSelector).Text.StartsWith("Поиск"));
             var dropdownMenuSelectGroupElements = webDriver.FindElements(By.CssSelector(dropdownMenuSelectGroupElementSelector));
             // проверка, что у нас группа есть и она только одна (т.е. мы можем ее точно определить)
@@ -68,7 +69,7 @@ namespace SsauRuTest
         /// Проверяет, есть ли для выбранной из выпадающего меню группы расписание.
         /// </summary>
         /// <returns>Имеется ли расписание на сайте университета (bool)</returns>
-        /// Примечание: если наличие расписания на сайте определяет, имеется ли группа в выпадающем меню или нет, этот метод можно не использовать 
+        /// Примечание: если группа выпадает в меню только когда для нее на сайте есть расписание, этот метод можно не использовать 
         public bool DoesTimetableCurrentlyExistForThisGroup()
         {
             try
